@@ -1,0 +1,21 @@
+import { useMutation } from 'react-query'
+import axiosInstance from './axiosInstance'
+
+const api = {
+    allProducts : 'api/products'
+}
+const service = {
+    get : async ( url ) => {
+        const {data} = await axiosInstance.get(url)
+        return data
+    }
+}
+
+const useProducts = ()=>{
+    const {mutate : getAllProducts} = useMutation({
+        mutationFn: service.get(api.allProducts)
+    })
+    return {getAllProducts}
+}
+
+export default { useProducts, }
