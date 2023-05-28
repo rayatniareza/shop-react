@@ -1,8 +1,5 @@
-import { useMutation } from 'react-query'
-import axiosInstance from './axiosInstance'
-
 const api = {
-    allProducts : 'api/products'
+    allProducts : '/products'
 }
 const service = {
     get : async ( url ) => {
@@ -11,11 +8,11 @@ const service = {
     }
 }
 
-const useProducts = ()=>{
-    const {mutate : getAllProducts} = useMutation({
-        mutationFn: service.get(api.allProducts)
+export default function useProducts () {
+    const { data } = useQuery({
+        queryFn: ()=>service.get(api.allProducts)
     })
-    return {getAllProducts}
+    return { data }
 }
 
-export default { useProducts, }
+//export default useProducts
