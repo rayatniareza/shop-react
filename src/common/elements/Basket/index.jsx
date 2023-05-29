@@ -4,7 +4,7 @@ import ProductRow from "../Holders/ProductRow"
 
 const Basket = () => {
 
-    const {state: {items}} = useBasket
+    const {state: {items}} = useBasket()
 
     return ( <div>
         { 

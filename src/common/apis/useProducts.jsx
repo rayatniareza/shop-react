@@ -1,3 +1,6 @@
+import { useQuery } from "react-query"
+import axiosInstance from "./axiosInstance"
+
 const api = {
     allProducts : '/products'
 }
