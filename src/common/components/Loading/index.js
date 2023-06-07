@@ -1,16 +1,18 @@
 import { useIsFetching, useIsMutating } from "react-query"
-import { useMemo } from "react"
 
-const Loading = ({children}) => {
-    const isFetching= useIsFetching()
-    const isMutating= useIsMutating()
-    const isLoading = useMemo(()=>{
-        return isFetching && isMutating
-    }, [ isFetching, isMutating ])
+const Loading = () => {
+    const isFetching = useIsFetching()
+    const isMutating = useIsMutating()
     return (
-        <div className="">
-            { isLoading ? <div className="hidden">Loading...</div> : children }
-        </div>
+        <>
+            { isFetching || isMutating ? 
+                <div className="flex h-screen justify-center items-center">
+                    <div className="inline-block animate-spin ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"/>
+                </div>
+                :
+                null 
+            }
+        </>
     )
 }
 

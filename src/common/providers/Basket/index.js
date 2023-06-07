@@ -4,7 +4,6 @@ import { array } from "../../utility"
 const BasketContext = createContext()
 
 function basketReducer( state, action ) {
-    console.log(state, action);
     let product = action.payload
     let id = product.id
     switch( action.type ){
@@ -12,7 +11,7 @@ function basketReducer( state, action ) {
             array.replaceOrAddItem( state, product, (item)=> item.id === id )
             return state
         case 'REMOVE_ITEM':
-            state.findAndRemoveItem( state, (item)=> item.id === id)
+            array.findAndRemoveItem( state, (item)=> item.id === id)
             return state
         default:
             return state
@@ -29,6 +28,7 @@ export const useBasket = () => {
         count++ //check count with constraints ( inventory or limitation )
         product = { ...product, count }
         dispatch({type:'UPDATE_ITEM', payload: product})
+        return product
     }
     const handleRemove = (item) => {
         let id = item.id
@@ -41,6 +41,7 @@ export const useBasket = () => {
             product = { ...product, count }
             dispatch({type:'UPDATE_ITEM', payload: product})
         }        
+        return product
     }
     return { handleAdd, handleRemove, state}
 }
